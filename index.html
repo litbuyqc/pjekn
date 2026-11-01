@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#edf5f5">
+  <title>Oopbuy Spreadsheet: Product Links &amp; Variant Tracker | CAFANS Guide</title>
+  <meta name="description" content="Build an Oopbuy spreadsheet with clearer product links, variant notes and review dates. Explore ten CAFANS categories and use a practical listing-check workflow.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Oopbuy Spreadsheet — Keep Your Finds in Focus">
+  <meta property="og:description" content="A practical product-link and variant-tracking guide, with ten CAFANS shopping categories and a simple record builder.">
+  <meta property="og:site_name" content="CAFANS Research Guide">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Oopbuy Spreadsheet — Keep Your Finds in Focus">
+  <meta name="twitter:description" content="Organize product links, record exact variants and keep your shopping shortlist easier to review.">
+
+  <!--
+    File: index.html
+    Before publication, add a self-referencing canonical URL and og:url
+    using this page's actual final public URL.
+
+    Primary keyword:
+    oopbuy spreadsheet
+
+    Secondary keywords:
+    oopbuy product tracker
+    oopbuy product links
+    oopbuy variant checklist
+    oopbuy spreadsheet template
+    oopbuy shopping shortlist
+
+    The 32 related research phrases appear in the visible research index.
+    No external fonts, JavaScript libraries or local asset files are required.
+    Brand photographs load remotely; their availability depends on their hosts.
+  -->
+
+  <style>
+    :root {
+      --bg: #edf5f5;
+      --paper: #ffffff;
+      --ink: #172f35;
+      --muted: #50666b;
+      --line: #c4d5d7;
+      --accent: #862c4b;
+      --accent-soft: #f4e4eb;
+      --teal: #124f57;
+      --soft: #dae9e9;
+      --width: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a, button, input, summary { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    ::selection { background: #e9b8ca; color: #172f35; }
+    .wrap { width: min(var(--width), calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      margin: 0 0 15px;
+      color: var(--accent);
+      font: 700 12px/1.5 "Courier New", monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .muted { color: var(--muted); }
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding-block: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .logo {
+      text-decoration: none;
+      font-weight: 900;
+      font-size: clamp(22px, 4vw, 30px);
+      letter-spacing: -.055em;
+    }
+    .masthead p {
+      margin: 0;
+      max-width: 320px;
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .directory { padding-block: 23px 0; }
+    .directory-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .categories a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 16px 13px;
+      min-height: 62px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+    .categories a::after { content: "↗"; color: var(--accent); flex: none; }
+    .categories a:hover { background: var(--accent-soft); }
+    .hero { padding-block: 66px 38px; }
+    h1 {
+      margin: 0;
+      font-size: clamp(52px, 8.7vw, 112px);
+      line-height: .96;
+      letter-spacing: -.075em;
+      font-weight: 900;
+      max-width: 1150px;
+    }
+    h1 span {
+      display: block;
+      margin-top: 17px;
+      color: var(--accent);
+      font-size: .65em;
+      letter-spacing: -.065em;
+    }
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      align-items: end;
+      gap: 48px;
+      margin-top: 30px;
+    }
+    .hero-bottom p { margin: 0; max-width: 650px; color: var(--muted); font-size: 18px; }
+    .hero-actions { display: flex; justify-content: flex-end; }
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      min-height: 52px;
+      padding: 14px 24px;
+      border: 1px solid var(--teal);
+      background: var(--teal);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0;
+    }
+    .button:hover { background: #0a3b42; }
+    .definition {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 25px;
+      padding-block: 24px;
+      border-block: 1px solid var(--line);
+    }
+    .definition h2 { margin: 0; font-size: 15px; }
+    .definition p { margin: 0; max-width: 880px; color: var(--muted); }
+    section { padding-block: 58px; }
+    .section-heading {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 27px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(29px, 4vw, 47px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .section-heading p { margin: 0; max-width: 540px; color: var(--muted); }
+    .lookbook {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    figure { margin: 0; min-width: 0; }
+    .photo {
+      display: block;
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo.contain img { object-fit: contain; padding: 16px; }
+    .image-fallback {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      padding: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    figcaption { padding-top: 13px; font-size: 13px; color: var(--muted); }
+    figcaption strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 15px; }
+    .image-note { margin: 20px 0 0; font-size: 12px; color: var(--muted); }
+    .ledger-section { border-block: 1px solid var(--line); background: #e1eeee; }
+    .ledger { border-top: 1px solid var(--line); }
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 62px 230px 1fr 190px;
+      gap: 20px;
+      padding-block: 25px;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .number { color: var(--accent); font: 700 13px/1.6 "Courier New", monospace; }
+    .ledger h3 { margin: 0; font-size: 18px; line-height: 1.4; }
+    .ledger p { margin: 0; color: var(--muted); font-size: 14px; }
+    .status {
+      display: inline-block;
+      width: fit-content;
+      padding: 5px 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font: 700 11px/1.5 "Courier New", monospace;
+      color: var(--teal);
+    }
+    .workbench { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; }
+    .workbench-intro p { color: var(--muted); }
+    .principle { margin-top: 26px; padding-left: 20px; border-left: 4px solid var(--accent); }
+    .principle strong { color: var(--ink); }
+    .builder { padding: 28px; background: var(--paper); border: 1px solid var(--line); }
+    .builder h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.025em; }
+    .builder > p { margin: 0 0 20px; font-size: 13px; color: var(--muted); }
+    .field { margin-bottom: 17px; }
+    .field label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; }
+    .field input {
+      display: block;
+      width: 100%;
+      min-height: 45px;
+      padding: 10px 12px;
+      color: var(--ink);
+      border: 1px solid #a9bfc2;
+      background: #f9fcfc;
+      border-radius: 0;
+    }
+    .checks { margin: 22px 0; padding: 0; border: 0; }
+    .checks legend { margin-bottom: 10px; font-size: 13px; font-weight: 700; }
+    .checks label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding-block: 7px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .checks input { margin-top: 5px; accent-color: var(--teal); }
+    .builder-actions { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+    #copy-status { margin: 0; color: var(--teal); font-size: 12px; min-height: 20px; }
+    .record-preview {
+      margin: 18px 0 0;
+      padding: 14px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: 12px/1.7 "Courier New", monospace;
+    }
+    .topics-section { padding-top: 0; }
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+    }
+    .topic { padding: 25px 20px 0 0; }
+    .topic + .topic { padding-left: 20px; border-left: 1px solid var(--line); }
+    .topic h3 { margin: 0 0 16px; font-size: 16px; color: var(--accent); }
+    .topic ul { list-style: none; padding: 0; margin: 0; }
+    .topic li { margin-bottom: 10px; color: var(--muted); font-size: 13px; }
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 65px; }
+    .faq-section { border-top: 1px solid var(--line); }
+    details { border-bottom: 1px solid var(--line); }
+    summary { padding: 19px 30px 19px 0; cursor: pointer; font-weight: 700; font-size: 15px; }
+    details p { margin: 0 0 20px; font-size: 14px; color: var(--muted); max-width: 690px; }
+    .closing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 38px;
+      background: var(--teal);
+      color: #fff;
+    }
+    .closing h2 { max-width: 700px; font-size: clamp(28px, 4vw, 43px); }
+    .closing p { margin: 12px 0 0; color: #d3e7e8; }
+    .closing .button { flex: none; background: #fff; color: var(--teal); border-color: #fff; }
+    .closing .button:hover { background: #dcebec; }
+    footer { padding-block: 30px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 25px; align-items: center; }
+    footer p { margin: 18px 0 0; max-width: 1000px; color: var(--muted); font-size: 12px; }
+    footer a { text-underline-offset: 4px; }
+
+    @media (max-width: 1000px) {
+      .categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ledger-row { grid-template-columns: 40px 180px 1fr; }
+      .ledger-row .status { grid-column: 3; }
+      .workbench { gap: 30px; }
+      .lookbook { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 16px; }
+      .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .topic:nth-child(3) { padding-left: 0; border-left: 0; }
+      .faq-layout { gap: 35px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: calc(100% - 32px); }
+      .masthead { padding-block: 18px; align-items: flex-start; }
+      .masthead p { max-width: 145px; font-size: 10px; }
+      .directory-label span:last-child { display: none; }
+      .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .categories a { min-height: 56px; padding: 12px 10px; font-size: 12px; }
+      .hero { padding-block: 42px 28px; }
+      h1 { font-size: clamp(43px, 10.8vw, 70px); }
+      h1 span { font-size: .72em; }
+      .hero-bottom, .definition, .section-heading, .workbench, .faq-layout { grid-template-columns: 1fr; gap: 20px; }
+      .hero-bottom p { font-size: 16px; }
+      .hero-actions { justify-content: flex-start; }
+      .definition { gap: 9px; }
+      section { padding-block: 40px; }
+      .section-heading { gap: 15px; }
+      .section-heading p { font-size: 14px; }
+      .ledger-row { grid-template-columns: 30px 1fr; gap: 9px 14px; padding-block: 21px; }
+      .ledger-row p, .ledger-row .status { grid-column: 2; }
+      .builder { padding: 20px; }
+      .topic { padding-right: 12px; }
+      .topic + .topic { padding-left: 12px; }
+      .topic:nth-child(3) { padding-left: 0; }
+      .topic li { font-size: 12px; }
+      .closing { flex-direction: column; align-items: flex-start; padding: 25px; }
+      .footer-top { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .footer-top span { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      .wrap { width: 100%; }
+      .builder, .hero-actions, .closing .button { display: none; }
+      .workbench { grid-template-columns: 1fr; }
+      .photo { max-height: 200px; }
+      section { padding-block: 24px; }
+      details p { display: block; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Oopbuy Spreadsheet: Product Links & Variant Tracker",
+        "description": "An independent guide to organizing product links, recording exact variants and reviewing a shopping shortlist.",
+        "inLanguage": "en",
+        "about": {
+          "@type": "Thing",
+          "name": "Oopbuy spreadsheet"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "inLanguage": "en",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an Oopbuy spreadsheet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An Oopbuy spreadsheet is a personal table of product references used to organize shopping research. Useful fields include the listing URL, seller, selected variant, measurement notes and the date the listing was last checked."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this an official Oopbuy website?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This is an independent research guide. Its browsing links lead to CAFANS, and it does not operate an Oopbuy checkout or account service."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I import these category links directly into Oopbuy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CAFANS category URLs are browsing destinations, not guaranteed importable marketplace product links. Open a listing, identify its original product URL where available and check whether your chosen service supports that URL."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I keep a product shortlist useful over time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Record the exact variant and review date, mark unavailable listings, and recheck the destination before ordering. Keep an older URL in your notes when replacing it so you can identify what changed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do the brand photographs confirm CAFANS stock or authenticity?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The photographs are visual references. They do not establish availability, seller authorization, authenticity or a relationship between the brands and CAFANS."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header class="wrap masthead">
+    <a class="logo" href="https://www.cafans.com" aria-label="Visit www.cafans.com">www.cafans.com</a>
+    <p>THE PRODUCT REFERENCE DESK<br>Independent shopping research</p>
+  </header>
+
+  <main>
+    <nav class="wrap directory" aria-label="Browse CAFANS product categories">
+      <div class="directory-label">
+        <span>START WITH A CATEGORY</span>
+        <span>All category destinations open on CAFANS ↗</span>
+      </div>
+      <div class="categories">
+        <a href="https://cafans.com/category-911-Shoes.html">Shoes</a>
+        <a href="https://cafans.com/category-912-Hoodies%2FSweaters.html">Hoodies/Sweaters</a>
+        <a href="https://cafans.com/category-913-T-Shirts.html">T-Shirts</a>
+        <a href="https://cafans.com/category-914-Jackets.html">Jackets</a>
+        <a href="https://cafans.com/category-915-Pants%2FShorts.html">Pants/Shorts</a>
+        <a href="https://cafans.com/category-916-Headwear.html">Headwear</a>
+        <a href="https://cafans.com/category-917-Sets.html">Sets</a>
+        <a href="https://cafans.com/category-918-underwear%2Funderpants.html">Underwear/underpants</a>
+        <a href="https://cafans.com/category-919-Jersey.html">Jersey</a>
+        <a href="https://cafans.com/category-920-Accessories.html">Accessories</a>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <section class="hero" aria-labelledby="main-heading">
+        <p class="eyebrow">Save the reference. Track the changes.</p>
+        <h1 id="main-heading">Oopbuy spreadsheet<span>Keep your finds in focus.</span></h1>
+        <div class="hero-bottom">
+          <p>A saved link is only the beginning. Give every find an exact variant, a review date and a clear next action—so your shortlist stays useful when you return to it.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://www.cafans.com">Explore CAFANS <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <aside class="definition" aria-labelledby="definition-title">
+        <h2 id="definition-title">What is an Oopbuy spreadsheet?</h2>
+        <p>An <strong>Oopbuy spreadsheet</strong> is a personal table of product references used to organize shopping research. Useful fields include the listing URL, seller, selected variant, measurement notes and the date the listing was last checked.</p>
+      </aside>
+
+      <section aria-labelledby="visual-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / Visual identifiers</p>
+            <h2 id="visual-heading">A photo starts the search.<br>A record keeps it precise.</h2>
+          </div>
+          <p>Use a visual reference to identify what interests you. Then record the details a photograph cannot settle: the exact option, seller information, measurements and listing status.</p>
+        </div>
+
+        <div class="lookbook">
+          <figure>
+            <!-- Photograph source: GASSAN, Blessed Night x TROPHY BY GASSAN. -->
+            <a class="photo" href="https://cafans.com/category-911-Shoes.html" aria-label="Browse shoes on CAFANS">
+              <img
+                src="https://assets-eu-01.kc-usercontent.com/f3c6491f-b1ec-01e4-bf22-cb84ae84970c/246166fe-5e93-44ac-b149-8893b3bab829/7.png?auto=format&amp;q=75&amp;w=750"
+                alt="Green Louis Vuitton and Nike sneaker displayed beside gold-tone jewelry"
+                width="750"
+                height="938"
+                loading="lazy"
+                decoding="async">
+            </a>
+            <figcaption><strong>Nike × Louis Vuitton / footwear</strong>Keep the colorway and selected size attached to the same product record.</figcaption>
+          </figure>
+
+          <figure>
+            <!-- Photograph source: Hypebae, Virgil Abloh Louis Vuitton SS19 collection. -->
+            <a class="photo contain" href="https://cafans.com/category-914-Jackets.html" aria-label="Browse jackets on CAFANS">
+              <img
+                src="https://image-cdn.hypb.st/https%3A%2F%2Fbae.hypebeast.com%2Ffiles%2F2018%2F10%2Fvirgil-abloh-louis-vuitton-debut-spring-summer-2019-release-0.jpg?cbr=1&amp;fit=max&amp;q=75&amp;w=640"
+                alt="Louis Vuitton collection collage with apparel, trainers and accessories"
+                width="640"
+                height="800"
+                loading="lazy"
+                decoding="async">
+            </a>
+            <figcaption><strong>Louis Vuitton / clothing</strong>Separate a collection reference from the exact garment you are researching.</figcaption>
+          </figure>
+
+          <figure>
+            <!-- Photograph source: Gucci official GG canvas baseball hat photography. -->
+            <a class="photo" href="https://cafans.com/category-916-Headwear.html" aria-label="Browse headwear on CAFANS">
+              <img
+                src="https://media.gucci.com/style/DarkGray_Center_0_0_1200x1200/1716997521/748475_4HG62_4468_004_100_0000_Light-Casquette-en-toileGG.jpg"
+                alt="Model wearing a blue Gucci GG canvas baseball cap"
+                width="1200"
+                height="1500"
+                loading="lazy"
+                decoding="async">
+            </a>
+            <figcaption><strong>Gucci / headwear</strong>Note the adjustment type and circumference information before choosing an option.</figcaption>
+          </figure>
+
+          <figure>
+            <!-- Photograph source: Hermès official Clic H bracelet photography. -->
+            <a class="photo contain" href="https://cafans.com/category-920-Accessories.html" aria-label="Browse accessories on CAFANS">
+              <img
+                src="https://assets.hermes.com/is/image/hermesproduct/bracelet-clic-h--700001F%204P-front-1-300-0-1000-1000_b.jpg"
+                alt="Hermès Clic H enamel bracelet with a gold-tone H clasp"
+                width="1000"
+                height="1250"
+                loading="lazy"
+                decoding="async">
+            </a>
+            <figcaption><strong>Hermès / jewelry</strong>Distinguish the finish, dimensions and closure from the overall visual style.</figcaption>
+          </figure>
+        </div>
+        <p class="image-note">Visual references only. Photographs do not establish CAFANS stock, authenticity or seller authorization. Image rights belong to their respective owners; no brand affiliation is implied.</p>
+      </section>
+    </div>
+
+    <section class="ledger-section" aria-labelledby="tracker-heading">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / Oopbuy product tracker</p>
+            <h2 id="tracker-heading">Give every link<br>a next action.</h2>
+          </div>
+          <p>An Oopbuy shopping shortlist works better when unfinished research is visible. Use these suggested labels in your own sheet; they are personal notes, not live platform status messages.</p>
+        </div>
+
+        <div class="ledger">
+          <article class="ledger-row">
+            <span class="number">01</span>
+            <h3>Capture the destination</h3>
+            <p>Save the individual listing URL and seller name. If you first found an item through a category page, open the actual listing before recording it.</p>
+            <span class="status">LINK SAVED</span>
+          </article>
+          <article class="ledger-row">
+            <span class="number">02</span>
+            <h3>Lock the exact variant</h3>
+            <p>Write the option text as shown: size, color, finish or set configuration. Different variants should have separate rows when their details differ.</p>
+            <span class="status">VARIANT TO CHECK</span>
+          </article>
+          <article class="ledger-row">
+            <span class="number">03</span>
+            <h3>Resolve missing evidence</h3>
+            <p>Record what you still need, such as a garment measurement, sole length, material description or clear closure photograph. Leave unknown facts marked unknown.</p>
+            <span class="status">DETAILS NEEDED</span>
+          </article>
+          <article class="ledger-row">
+            <span class="number">04</span>
+            <h3>Review before ordering</h3>
+            <p>Reopen the destination and check the selected option, price and availability. Add a review date and mark an unavailable listing rather than silently replacing it.</p>
+            <span class="status">RECHECK BEFORE USE</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <section class="workbench" aria-labelledby="template-heading">
+        <div class="workbench-intro">
+          <p class="eyebrow">03 / Oopbuy spreadsheet template</p>
+          <h2 id="template-heading">One useful record.<br>Fewer loose tabs.</h2>
+          <p>Build a starter note for your own spreadsheet. The tool produces plain text you can paste into a notes column, then expand as you gather evidence.</p>
+          <p>For a larger table, keep these as separate columns: <strong>item, listing URL, seller, variant, missing information, status and last reviewed</strong>.</p>
+          <div class="principle">
+            <p><strong>Keep sources separate.</strong><br>A category URL helps you browse. An original marketplace URL identifies a source listing. A service-specific URL may serve another purpose. Label each one instead of treating them as interchangeable.</p>
+          </div>
+          <noscript>
+            <p>The record builder requires JavaScript. You can still copy the field names above and use the complete guide without it.</p>
+          </noscript>
+        </div>
+
+        <form class="builder" id="record-form">
+          <h3>Your variant-check note</h3>
+          <p>Fields stay in this browser tab. This page does not submit or store your entries.</p>
+
+          <div class="field">
+            <label for="item">Item reference</label>
+            <input id="item" name="item" type="text" maxlength="160" placeholder="Example: low-top sneaker" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="variant">Exact variant</label>
+            <input id="variant" name="variant" type="text" maxlength="180" placeholder="Example: white / EU 42 / option B" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="missing">Information still needed</label>
+            <input id="missing" name="missing" type="text" maxlength="220" placeholder="Example: insole measurement and current option availability" autocomplete="off">
+          </div>
+
+          <fieldset class="checks">
+            <legend>Oopbuy variant checklist</legend>
+            <label><input type="checkbox" id="link-check"> <span>I opened the individual listing, rather than only a category page.</span></label>
+            <label><input type="checkbox" id="variant-check"> <span>I recorded the exact option I intend to compare.</span></label>
+            <label><input type="checkbox" id="evidence-check"> <span>I checked the measurements or specifications relevant to this item.</span></label>
+          </fieldset>
+
+          <div class="builder-actions">
+            <button class="button" type="submit" id="copy-button">Copy research note <span aria-hidden="true">↗</span></button>
+            <p id="copy-status" role="status" aria-live="polite"></p>
+          </div>
+          <pre class="record-preview" id="record-preview" aria-label="Research note preview">Enter your notes above to prepare a product record.</pre>
+        </form>
+      </section>
+
+      <section class="topics-section" aria-labelledby="topics-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / Research index</p>
+            <h2 id="topics-heading">Search with a purpose.</h2>
+          </div>
+          <p>Use these related research phrases to describe the question you need to answer. They are topic suggestions, not search-volume figures or promises of product availability.</p>
+        </div>
+
+        <div class="topics">
+          <div class="topic">
+            <h3>Find the source</h3>
+            <ul>
+              <li>oopbuy product links</li>
+              <li>oopbuy spreadsheet product sources</li>
+              <li>oopbuy original listing URL</li>
+              <li>oopbuy seller reference notes</li>
+              <li>oopbuy clothing link organizer</li>
+              <li>oopbuy sneaker product research</li>
+              <li>oopbuy accessory listing guide</li>
+              <li>oopbuy category browsing guide</li>
+            </ul>
+          </div>
+          <div class="topic">
+            <h3>Specify the option</h3>
+            <ul>
+              <li>oopbuy variant checklist</li>
+              <li>oopbuy colorway comparison</li>
+              <li>oopbuy size option notes</li>
+              <li>oopbuy jacket measurement record</li>
+              <li>oopbuy hoodie sizing research</li>
+              <li>oopbuy pants length comparison</li>
+              <li>oopbuy headwear size notes</li>
+              <li>oopbuy jewelry dimension checklist</li>
+            </ul>
+          </div>
+          <div class="topic">
+            <h3>Maintain the record</h3>
+            <ul>
+              <li>oopbuy product tracker</li>
+              <li>oopbuy spreadsheet template</li>
+              <li>oopbuy shopping shortlist</li>
+              <li>oopbuy listing review date</li>
+              <li>oopbuy saved link maintenance</li>
+              <li>oopbuy unavailable listing notes</li>
+              <li>oopbuy duplicate product records</li>
+              <li>oopbuy product research workflow</li>
+            </ul>
+          </div>
+          <div class="topic">
+            <h3>Complete the review</h3>
+            <ul>
+              <li>oopbuy product photo checklist</li>
+              <li>oopbuy material information checks</li>
+              <li>oopbuy seller questions checklist</li>
+              <li>oopbuy current price verification</li>
+              <li>oopbuy shipping estimate notes</li>
+              <li>oopbuy return terms research</li>
+              <li>oopbuy pre-order listing review</li>
+              <li>oopbuy spreadsheet missing details</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-heading">
+        <div class="faq-layout">
+          <div>
+            <p class="eyebrow">05 / Direct answers</p>
+            <h2 id="faq-heading">Before you<br>follow the link.</h2>
+          </div>
+
+          <div>
+            <details open>
+              <summary>What is an Oopbuy spreadsheet?</summary>
+              <p>An Oopbuy spreadsheet is a personal table of product references used to organize shopping research. Useful fields include the listing URL, seller, selected variant, measurement notes and the date the listing was last checked.</p>
+            </details>
+            <details>
+              <summary>Is this an official Oopbuy website?</summary>
+              <p>No. This is an independent research guide. Its browsing links lead to CAFANS, and it does not operate an Oopbuy checkout or account service.</p>
+            </details>
+            <details>
+              <summary>Can I import these category links directly into Oopbuy?</summary>
+              <p>CAFANS category URLs are browsing destinations, not guaranteed importable marketplace product links. Open a listing, identify its original product URL where available and check whether your chosen service supports that URL.</p>
+            </details>
+            <details>
+              <summary>How do I keep a product shortlist useful over time?</summary>
+              <p>Record the exact variant and review date, mark unavailable listings, and recheck the destination before ordering. Keep an older URL in your notes when replacing it so you can identify what changed.</p>
+            </details>
+            <details>
+              <summary>Do the brand photographs confirm CAFANS stock or authenticity?</summary>
+              <p>No. The photographs are visual references. They do not establish availability, seller authorization, authenticity or a relationship between the brands and CAFANS.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <aside class="closing" aria-label="Continue browsing on CAFANS">
+        <div>
+          <h2>Choose a category.<br>Build a reference you can revisit.</h2>
+          <p>Start your next product research session on CAFANS.</p>
+        </div>
+        <a class="button" href="https://www.cafans.com">Browse CAFANS <span aria-hidden="true">↗</span></a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer-top">
+      <a class="logo" href="https://www.cafans.com">www.cafans.com</a>
+      <span class="muted">Product references · Variant notes · Review dates</span>
+    </div>
+    <p>Independent educational content. Oopbuy, Nike, Louis Vuitton, Gucci and Hermès are trademarks of their respective owners. This page does not claim endorsement, partnership or official status. Verify each listing and the applicable seller and service terms before making a purchase.</p>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("record-form");
+      const preview = document.getElementById("record-preview");
+      const status = document.getElementById("copy-status");
+      const button = document.getElementById("copy-button");
+      const item = document.getElementById("item");
+      const variant = document.getElementById("variant");
+      const missing = document.getElementById("missing");
+      const linkCheck = document.getElementById("link-check");
+      const variantCheck = document.getElementById("variant-check");
+      const evidenceCheck = document.getElementById("evidence-check");
+
+      function localDate() {
+        const now = new Date();
+        return [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0")
+        ].join("-");
+      }
+
+      function recordText() {
+        const complete = linkCheck.checked && variantCheck.checked && evidenceCheck.checked;
+        return [
+          "PRODUCT RESEARCH NOTE",
+          "Item: " + (item.value.trim() || "Not recorded"),
+          "Variant: " + (variant.value.trim() || "Not recorded"),
+          "Information needed: " + (missing.value.trim() || "Not recorded"),
+          "Individual listing opened: " + (linkCheck.checked ? "Yes" : "Not confirmed"),
+          "Exact option recorded: " + (variantCheck.checked ? "Yes" : "Not confirmed"),
+          "Relevant specifications checked: " + (evidenceCheck.checked ? "Yes" : "Not confirmed"),
+          "Checklist: " + (complete ? "All three checks marked" : "Checks remain"),
+          "Note prepared: " + localDate(),
+          "Next action: Recheck the listing and selected option before ordering."
+        ].join("\n");
+      }
+
+      form.addEventListener("input", () => {
+        preview.textContent = recordText();
+        status.textContent = "";
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const text = recordText();
+        preview.textContent = text;
+        button.disabled = true;
+
+        try {
+          if (!navigator.clipboard || !window.isSecureContext) {
+            throw new Error("Clipboard unavailable");
+          }
+          await navigator.clipboard.writeText(text);
+          status.textContent = "Copied. Paste it into your spreadsheet notes.";
+        } catch (error) {
+          const selection = window.getSelection();
+          if (selection) {
+            const range = document.createRange();
+            range.selectNodeContents(preview);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          }
+          status.textContent = "Select the note below and copy it with Ctrl+C or Command+C.";
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      document.querySelectorAll(".photo img").forEach((img) => {
+        function showFallback() {
+          if (!img.isConnected) return;
+          const fallback = document.createElement("span");
+          fallback.className = "image-fallback";
+          fallback.textContent = img.alt + " — image unavailable. Browse the related CAFANS category.";
+          img.replaceWith(fallback);
+        }
+
+        img.addEventListener("error", showFallback, { once: true });
+        if (img.complete && img.naturalWidth === 0) showFallback();
+      });
+    })();
+  </script>
+</body>
+</html>
